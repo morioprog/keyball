@@ -31,6 +31,14 @@ enum custom_keycodes
   BKSL_UNSC,              // 「\」→「_」
 };
 
+// https://yakinikunotare.boo.jp/orebase2/keyboard/diy_keyboard/qmk/tap_dance/start
+enum tap_dances
+{
+  TD_TASKVIEW = 0,
+};
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_TASKVIEW] = ACTION_TAP_DANCE_DOUBLE(LT(4, KC_ENTER), G(KC_TAB))};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
@@ -38,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LALT_T(KC_ESC), KC_Q, KC_W, KC_E, KC_R, KC_T,    KC_Y, KC_U, KC_I     , KC_O     , KC_P     , KC_BSPC  ,
     LSFT_T(KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G,    KC_H, KC_J, KC_K     , KC_L     , MINS_TLDE, EQAL_PLUS,
     RSFT_T(KC_TAB), KC_Z, KC_X, KC_C, KC_V, KC_B,    KC_N, KC_M, CMMA_SMCL, PROD_COLN, SLSH_UNSC, BKSL_UNSC,
-    KC_LEFT, KC_RIGHT, LT(3, KC_SPACE), LCTL_T(KC_ENTER), LT(4, G(KC_TAB)), // TODO: G(KC_TAB) が効かない
+    KC_LEFT, KC_RIGHT, LT(3, KC_SPACE), LCTL_T(KC_ENTER), TD(TD_TASKVIEW),
     RCTL_T(KC_ENTER), LT(3, KC_SPACE), _______, _______, KC_RGUI
   ),
 
@@ -46,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
-    _______, _______, KC_MS_BTN1, KC_MS_BTN2, MO(2),
+    A(KC_LEFT), A(KC_RIGHT), KC_MS_BTN1, KC_MS_BTN2, MO(2),
     KC_MS_BTN2, KC_MS_BTN1, _______, _______, _______
   ),
 
